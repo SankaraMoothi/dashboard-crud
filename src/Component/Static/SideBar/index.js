@@ -97,7 +97,7 @@ function SideBar({ mode, setMode }) {
                   textAlign="center"
                   onClick={() => navigate("/Users")}
                 >
-                  Users
+                  Add Users
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -149,7 +149,7 @@ function SideBar({ mode, setMode }) {
               onClick={() => navigate("/Users")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Users
+              Add Users
             </Button>
             <Button
               onClick={() => navigate("/Product")}
