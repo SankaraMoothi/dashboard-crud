@@ -4,9 +4,29 @@ import { Button, Box } from "@mui/material";
 import { useFormik } from "formik";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import * as yup from "yup";
 
 function UserEdit() {
   const param = useParams();
+  const formikValidation = yup.object({
+    Name: yup
+      .string()
+      .min(5, "Name Must Contain Min 5 characters")
+      .required("Please Fill The Name"),
+    Position: yup.string().required("Ur Position I the Company Please"),
+    Office: yup.string().required("Please Enter The Office Name"),
+    Age: yup
+      .string()
+      .min(2, "Ur Age Must Be greater The 10")
+      .required("Please Fill the Age"),
+    Startdate: yup
+      .string()
+      .required("Please Fill The Date That U Join In the Company"),
+    Salary: yup
+      .string()
+      .min(3, "Ur Salary Must Be Greater The 1000$")
+      .required("Please Enter the Salary"),
+  });
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -17,22 +37,7 @@ function UserEdit() {
       Startdate: "",
       Salary: "",
     },
-    validate: (values) => {
-      let error = {};
-      if (values.Name === "") {
-        error.Name = "Please Enter Name";
-      }
-      if (values.Name.length < 4) {
-        error.Name = "Name length Should Greater 5 ";
-      }
-      if (values.Position === "") {
-        error.Position = "Please Enter Position";
-      }
-      if (values.Office === "") {
-        error.Office = "Please Enter Office Name";
-      }
-      return error;
-    },
+    validationSchema: formikValidation,
     onSubmit: async (value) => {
       await axios.put(
         `https://631d700ecc652771a4859a9c.mockapi.io/Users/${param.id}`,
@@ -79,52 +84,73 @@ function UserEdit() {
               label="Name"
               value={formik.values.Name}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Name"
               variant="outlined"
             />
-            <span style={{ color: "red" }}>{formik.errors.Name}</span>
+            {formik.touched.Name && formik.errors.Name
+              ? formik.errors.Name
+              : null}
+
             <TextField
               id="outlined-basic"
               label="Position"
               value={formik.values.Position}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Position"
               variant="outlined"
             />
-            <span style={{ color: "red" }}>{formik.errors.Position}</span>
+            {formik.touched.Position && formik.errors.Position
+              ? formik.errors.Position
+              : null}
+
             <TextField
               id="outlined-basic"
               label="Age"
               value={formik.values.Age}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Age"
               variant="outlined"
             />
+            {formik.touched.Age && formik.errors.Age ? formik.errors.Age : null}
             <TextField
               id="outlined-basic"
               label="Office"
               value={formik.values.Office}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Office"
               variant="outlined"
             />
-            <span style={{ color: "red" }}>{formik.errors.Office}</span>
+            {formik.touched.Office && formik.errors.Office
+              ? formik.errors.Office
+              : null}
             <TextField
               id="standard-basic"
               label="Starting Date"
               value={formik.values.Startdate}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Startdate"
               variant="outlined"
             />
+            {formik.touched.Startdate && formik.errors.Startdate
+              ? formik.errors.Startdate
+              : null}
             <TextField
               id="outlined-basic"
               label="Salary"
               value={formik.values.Salary}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Salary"
               variant="outlined"
             />
+            {formik.touched.Salary && formik.errors.Salary
+              ? formik.errors.Salary
+              : null}
             <Button
               variant="contained"
               disabled={!formik.isValid}
@@ -133,7 +159,7 @@ function UserEdit() {
               Submit
             </Button>
 
-            <Link to="/Users" className="btn btn-primary mt-2">
+            <Link to="/" className="btn btn-primary mt-2">
               Back
             </Link>
           </form>
