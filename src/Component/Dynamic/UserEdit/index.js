@@ -16,15 +16,15 @@ function UserEdit() {
     Position: yup.string().required("Ur Position I the Company Please"),
     Office: yup.string().required("Please Enter The Office Name"),
     Age: yup
-      .string()
-      .min(2, "Ur Age Must Be greater The 10")
+      .number()
+      .min(18, "Ur Age Must Be greater The 18")
       .required("Please Fill the Age"),
     Startdate: yup
       .string()
       .required("Please Fill The Date That U Join In the Company"),
     Salary: yup
-      .string()
-      .min(3, "Ur Salary Must Be Greater The 1000$")
+      .number()
+      .min(1000, "Ur Salary Must Be Greater The 1000$")
       .required("Please Enter the Salary"),
   });
   const navigate = useNavigate();
@@ -87,10 +87,13 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Name"
               variant="outlined"
+              error={formik.touched.Name && formik.errors.Name}
+              helperText={
+                formik.touched.Name && formik.errors.Name
+                  ? formik.errors.Name
+                  : null
+              }
             />
-            {formik.touched.Name && formik.errors.Name
-              ? formik.errors.Name
-              : null}
 
             <TextField
               id="outlined-basic"
@@ -100,10 +103,13 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Position"
               variant="outlined"
+              error={formik.touched.Position && formik.errors.Position}
+              helperText={
+                formik.touched.Position && formik.errors.Position
+                  ? formik.errors.Position
+                  : null
+              }
             />
-            {formik.touched.Position && formik.errors.Position
-              ? formik.errors.Position
-              : null}
 
             <TextField
               id="outlined-basic"
@@ -113,8 +119,14 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Age"
               variant="outlined"
+              error={formik.touched.Age && formik.errors.Age}
+              helperText={
+                formik.touched.Age && formik.errors.Age
+                  ? formik.errors.Age
+                  : null
+              }
             />
-            {formik.touched.Age && formik.errors.Age ? formik.errors.Age : null}
+
             <TextField
               id="outlined-basic"
               label="Office"
@@ -123,10 +135,14 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Office"
               variant="outlined"
+              error={formik.touched.Office && formik.errors.Office}
+              helperText={
+                formik.touched.Office && formik.errors.Office
+                  ? formik.errors.Office
+                  : null
+              }
             />
-            {formik.touched.Office && formik.errors.Office
-              ? formik.errors.Office
-              : null}
+
             <TextField
               id="standard-basic"
               label="Starting Date"
@@ -135,10 +151,14 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Startdate"
               variant="outlined"
+              error={formik.touched.Startdate && formik.errors.Startdate}
+              helperText={
+                formik.touched.Startdate && formik.errors.Startdate
+                  ? formik.errors.Startdate
+                  : null
+              }
             />
-            {formik.touched.Startdate && formik.errors.Startdate
-              ? formik.errors.Startdate
-              : null}
+
             <TextField
               id="outlined-basic"
               label="Salary"
@@ -147,10 +167,14 @@ function UserEdit() {
               onBlur={formik.handleBlur}
               name="Salary"
               variant="outlined"
+              error={formik.touched.Salary && formik.errors.Salary}
+              helperText={
+                formik.touched.Salary && formik.errors.Salary
+                  ? formik.errors.Salary
+                  : null
+              }
             />
-            {formik.touched.Salary && formik.errors.Salary
-              ? formik.errors.Salary
-              : null}
+
             <Button
               variant="contained"
               disabled={!formik.isValid}
